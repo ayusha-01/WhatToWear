@@ -77,7 +77,20 @@ const Register = () => {
         }
     };
 
-    // ... (handleFinalSubmit remains same)
+    const handleFinalSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        try {
+            const res = await axios.post('/auth/register-complete', formData);
+            login(res.data, res.data.token);
+            navigate('/');
+            toast.success('Welcome to What To Wear!');
+        } catch (err) {
+            setError(err.response?.data?.message || 'Registration failed');
+        } finally {
+            setLoading(false);
+        }
+    };
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-background px-4 relative overflow-hidden">
