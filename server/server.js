@@ -22,11 +22,13 @@ app.use((req, res, next) => {
     next();
 });
 
-// Helper to remove trailing slash
-const clientUrl = (process.env.CLIENT_URL || 'http://localhost:5174').replace(/\/$/, '');
+// Helper to handle multiple allowed origins (with and without trailing slash)
+const clientUrl = process.env.CLIENT_URL || 'http://localhost:5174';
+const clientUrlStripped = clientUrl.replace(/\/$/, '');
+const clientUrlWithSlash = `${clientUrlStripped}/`;
 
 app.use(cors({
-    origin: clientUrl,
+    origin: [clientUrlStripped, clientUrlWithSlash, 'http://localhost:5174'],
     credentials: true
 }));
 app.use(passport.initialize());
