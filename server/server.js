@@ -15,6 +15,13 @@ require('./config/passport')(passport);
 
 // Middleware
 app.use(express.json());
+
+// Request Logger
+app.use((req, res, next) => {
+    console.log(`[REQUEST] ${req.method} ${req.path}`);
+    next();
+});
+
 app.use(cors({
     origin: process.env.CLIENT_URL || 'http://localhost:5174',
     credentials: true
