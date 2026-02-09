@@ -8,9 +8,10 @@ module.exports = function (passport) {
             {
                 clientID: process.env.GOOGLE_CLIENT_ID || 'place_holder_id',
                 clientSecret: process.env.GOOGLE_CLIENT_SECRET || 'place_holder_secret',
-                callbackURL: '/api/auth/google/callback', // Relative paths can sometimes cause issues with proxies
-                // BETTER:
-                callbackURL: 'http://localhost:5001/api/auth/google/callback',
+                clientID: process.env.GOOGLE_CLIENT_ID || 'place_holder_id',
+                clientSecret: process.env.GOOGLE_CLIENT_SECRET || 'place_holder_secret',
+                callbackURL: '/api/auth/google/callback',
+                proxy: true, // Important for Render/Heroku load balancers
             },
             async (accessToken, refreshToken, profile, done) => {
                 try {
