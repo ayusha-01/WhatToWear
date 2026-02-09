@@ -22,8 +22,11 @@ app.use((req, res, next) => {
     next();
 });
 
+// Helper to remove trailing slash
+const clientUrl = (process.env.CLIENT_URL || 'http://localhost:5174').replace(/\/$/, '');
+
 app.use(cors({
-    origin: process.env.CLIENT_URL || 'http://localhost:5174',
+    origin: clientUrl,
     credentials: true
 }));
 app.use(passport.initialize());
@@ -50,7 +53,7 @@ app.get('/', (req, res) => {
 const server = require('http').createServer(app);
 const io = require('socket.io')(server, {
     cors: {
-        origin: process.env.CLIENT_URL || 'http://localhost:5174',
+        origin: clientUrl,
         methods: ["GET", "POST"]
     }
 });
