@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+  --color-bg: #f8fafc;
+  /* Slate 50 */
+  --color-text: #0f172a;
+  /* Slate 900 */
+}
+
+.dark {
+  color-scheme: dark;
+  --color-bg: #0f172a;
+  /* Slate 900 */
+  --color-text: #f1f5f9;
+  /* Slate 100 */
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
